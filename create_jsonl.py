@@ -1,7 +1,6 @@
 import praw
 import sys
 import argparse
-#import credentials
 import os
 
 # Create Reddit instance
