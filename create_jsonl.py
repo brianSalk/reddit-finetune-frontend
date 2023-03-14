@@ -17,7 +17,6 @@ reddit = praw.Reddit(
 
 def create(subreddits,comments=0,submission_body=True,questions_only=True,
         min_completion_length=5,max_completion_length=200, submissions_per_sub=1_000):
-    # Constants
     PROMPT_END = '\n\n###\n\n'
     COMP_END = '.#,'
     if questions_only:
