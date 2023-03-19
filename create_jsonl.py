@@ -3,7 +3,7 @@ import sys
 import argparse
 import os
 import streamlit as st
-
+import finetune_submodule.create_json
 # Create Reddit instance
 reddit = praw.Reddit(
     client_secret=os.environ['REDDIT_CLIENT_SECRET'],
