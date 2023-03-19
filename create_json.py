@@ -13,10 +13,10 @@ reddit = praw.Reddit(
     user_agent='userboboozerforHooozzer'
 )
 
-# Set up argparse
-
-def create(subreddits,comments=0,submission_body=True,questions_only=True,
-        min_completion_length=5,max_completion_length=200, submissions_per_sub=1_000):
+def create(subreddits,comments,submission_body,
+        questions_only,min_completion_length,
+        max_completion_length,submissions_per_sub,
+        must_contain, min_rating_for_sub, min_rating_for_comment):
     PROMPT_END = '\n\n###\n\n'
     COMP_END = '.#,'
     if questions_only:
@@ -44,9 +44,9 @@ def create(subreddits,comments=0,submission_body=True,questions_only=True,
             selftext = selftext.replace('"', "'")
             selftext = selftext.replace("\\", '')
 
-            # Generate JSON string
-            if selftext and submission_body and \
-                len(selftext) > min_completion_length and len(selftext) < max_completion_length:
+            # Generate JSON string using submission body
+            if selftext and submission_body and submission and len(selftext) >= min_completion_length and len(selftext) <= max_completion_length \
+                and submission.score >= min_rating_for_sub:
                 prompt = f'"prompt": "{title}{PROMPT_END}",'
                 completion = f'"completion": " {selftext}{COMP_END}"'
                 string = '{' + prompt + completion + '}'
@@ -67,10 +67,8 @@ def create(subreddits,comments=0,submission_body=True,questions_only=True,
                     prompt = f'"prompt": "{title}{PROMPT_END}",'
                     completion = f'"completion": " {selftext}{COMP_END}"'
                     string = '{' + prompt + completion + '}'
-                    if len(selftext) < max_completion_length and \
-                    len(selftext) > min_completion_length:
+                    if len(selftext) <= max_completion_length and \
+                    len(selftext) >= min_completion_length and comment.score >= min_rating_for_comment:
                         ans.append(string)
                         comment_count += 1
     return "\n".join(ans)
-if __name__ == "__main__":
-    pass

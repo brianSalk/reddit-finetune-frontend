@@ -3,7 +3,7 @@ import sys
 import streamlit as st
 #import create_jsonl
 
-import finetune_submodule.create_json
+import create_jsonl
 
 comment_count = 0
 min_sub_upvote=0
