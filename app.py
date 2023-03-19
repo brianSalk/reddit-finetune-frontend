@@ -22,7 +22,7 @@ if st.button('get jsonl'):
     st.write(f'creating jsonl from the following subreddits: {subreddits}\n this may take some time')
     max_completion_length = 200
     min_completion_length = 2
-    jsonl_text = finetune_submodule.create_json.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,1000, "feature not supported", min_sub_upvote,min_comment_upvote)
+    jsonl_text = create_json.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,1000, "feature not supported", min_sub_upvote,min_comment_upvote)
     st.write('your jsonl is ready, copy the text below')
     st.code(jsonl_text)
 
