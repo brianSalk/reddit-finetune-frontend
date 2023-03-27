@@ -14,7 +14,7 @@ st.title(":green[Create Jsonl From Reddit]")
 subreddits = st.text_input('enter subreddits seperated by spaces')
 
 submission_body = st.checkbox('include the submission body in your jsonl')
-questions_only = st.checkbox('questions only')
+questions_only = st.checkbox('questions only (prompt ends with "?")')
 if st.checkbox('include comments'):
     comment_count = st.number_input('number of comments to scrape', step=1)
 if st.checkbox('set minimum comment upvote limit'):
