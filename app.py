@@ -10,7 +10,7 @@ min_comment_upvote=0
 with st.sidebar:
     st.title("found a bug or want to improve this app?")
     st.write("submit a pull request or open an issue [here](https://github.com/brianSalk/reddit-finetune-frontend)")
-st.title("Create Jsonl From Reddit")
+st.title(":green[Create Jsonl From Reddit]")
 subreddits = st.text_input('enter subreddits seperated by spaces')
 
 submission_body = st.checkbox('include the submission body in your jsonl')
