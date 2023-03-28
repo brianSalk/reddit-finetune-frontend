@@ -68,7 +68,7 @@ def create(subreddits,comments,submission_body,
                     try:
                         selftext = comment.body.strip()
                     except Exception:
-                        break
+                        continue
                     selftext = selftext.replace('\n', ' ')
                     selftext = selftext.replace('"', "'")
                     selftext = selftext.replace('\\', '')
