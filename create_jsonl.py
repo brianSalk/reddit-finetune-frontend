@@ -14,7 +14,7 @@ reddit = praw.Reddit(
 
 def create(subreddits,comments,submission_body,
         questions_only,min_completion_length,
-        max_completion_length,submissions_per_sub,
+        max_completion_length,max_submissions,
         must_contain, min_rating_for_sub, min_rating_for_comment,
         max_lines):
     PROMPT_END = '\n\n###\n\n'
@@ -29,7 +29,11 @@ def create(subreddits,comments,submission_body,
         if line_count == max_lines:
             return "\n".join(ans)
         next_sub = reddit.subreddit(sub)
-        for submission in next_sub.top(limit=submissions_per_sub):
+        sub_count = 0
+        for submission in next_sub.top(limit=1_000):
+            scraped_current = False
+            if sub_count == max_submissions:
+                break
             if line_count == max_lines:
                 return "\n".join(ans)
             title = submission.title.strip()
@@ -48,7 +52,6 @@ def create(subreddits,comments,submission_body,
             selftext = selftext.replace('\n', ' ')
             selftext = selftext.replace('"', "'")
             selftext = selftext.replace("\\", '')
-
             # Generate JSON string using submission body
             if selftext and submission_body and submission and len(selftext) >= min_completion_length and len(selftext) <= max_completion_length \
                 and submission.score >= min_rating_for_sub:
@@ -57,6 +60,7 @@ def create(subreddits,comments,submission_body,
                 string = '{' + prompt + completion + '}'
                 ans.append(string)
                 line_count+=1
+                scraped_current = True
             # Generate JSON string for comments
             if comments:
                 comment_count = 0
@@ -78,6 +82,9 @@ def create(subreddits,comments,submission_body,
                     if len(selftext) <= max_completion_length and \
                     len(selftext) >= min_completion_length and comment.score >= min_rating_for_comment:
                         ans.append(string)
+                        scraped_current = True
                         line_count+=1
                         comment_count += 1
+            if scraped_current == True:
+                sub_count+=1
     return "\n".join(ans)

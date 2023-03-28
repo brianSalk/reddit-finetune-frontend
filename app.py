@@ -3,6 +3,7 @@ import sys
 import streamlit as st
 
 import create_jsonl
+max_submissions_per_sub = 1_000
 max_lines = float('inf')
 comment_count = 0
 min_sub_upvote=0
@@ -23,12 +24,14 @@ if st.checkbox('set minimum submission upvote limit'):
     min_sub_upvote = st.number_input('only scrape submissions with with many upvotes', min_value=1, step=1)
 if st.checkbox('set maximum lines'):
     max_lines = st.number_input('maximum number of promt/completion pairs', min_value=1, step=1)
+if st.checkbox('set maximum number of submissions per subreddit'):
+    max_submissions_per_sub = st.number_input('maximum number of submissions per subreddit', min_value=1,max_value=1_000, step=1)
 if st.button('get jsonl'):
     st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
     st.write('**please be patient while I create your JSONL file**')
     max_completion_length = 200
     min_completion_length = 2
-    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,1000, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines)
+    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,max_submissions_per_sub, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines)
     st.write('your jsonl is ready, copy the text below')
     st.code(jsonl_text)
 
