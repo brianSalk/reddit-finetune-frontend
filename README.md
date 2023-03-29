@@ -1,7 +1,7 @@
 # reddit-finetune-frontend
 Use content from reddit to finetune an openai model such as davinci.  Link to app [here](https://fine-tune-reddit.herokuapp.com/)
 ## create_jsonl.py
-scrapes reddit and formats output to be in the form of jsonl document.  By default scrapes submission titles that end in a questionmark as the prompt and the submission body as the completion.
+Gathers data from Reddit and creates a valid JSONL file for fine tuning.  This script uses the title of a submission as the "prompt" and uses the submission body and/or comments as the completion.  [This](https://platform.openai.com/docs/guides/fine-tuning/) website walks you through the fine-tuning steps.  When you get to the part where you need to actually fine-tune the model with a JSONL file, this script will take the data off Reddit and allow you to do that.  Please note that you should still vet the resulting file manually to make sure that the data makes sense.
 ## app.py
 streamlit app that contains the very basic front-end.
 ## contributing:
