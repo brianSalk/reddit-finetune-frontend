@@ -16,7 +16,7 @@ def create(subreddits,comments,submission_body,
         questions_only,min_completion_length,
         max_completion_length,max_submissions,
         must_contain, min_rating_for_sub, min_rating_for_comment,
-        max_lines):
+        max_lines,regex):
     PROMPT_END = '\n\n###\n\n'
     COMP_END = '.#,'
     if questions_only:

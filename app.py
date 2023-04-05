@@ -8,6 +8,7 @@ max_lines = float('inf')
 comment_count = 0
 min_sub_upvote=0
 min_comment_upvote=0
+regex=""
 with st.sidebar:
     st.title("found a bug or want to improve this app?")
     st.write("submit a pull request or open an issue [here](https://github.com/brianSalk/reddit-finetune-frontend)")
@@ -31,7 +32,7 @@ if st.button('get jsonl'):
     st.write('**please be patient while I create your JSONL file**')
     max_completion_length = 200
     min_completion_length = 2
-    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,max_submissions_per_sub, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines)
+    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,max_submissions_per_sub, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines,"feature not supported yet")
     st.write('your jsonl is ready, copy the text below')
     st.code(jsonl_text)
 
