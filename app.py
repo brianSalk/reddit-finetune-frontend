@@ -28,8 +28,8 @@ if st.checkbox('set maximum lines'):
     max_lines = st.number_input('maximum number of promt/completion pairs', min_value=1, step=1)
 if st.checkbox('set maximum number of submissions per subreddit'):
     max_submissions_per_sub = st.number_input('maximum number of submissions per subreddit', min_value=1,max_value=1_000, step=1)
-if st.checkbox('use regulare expression'):
-    comp_regex = st.text_input('only inlude completions that include regex')
+if st.checkbox('use regular expression'):
+    comp_regex = st.text_input('only inlude completions that include the following regex')
 if st.button('get jsonl'):
     st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
     st.write('**please be patient while I create your JSONL file**')
