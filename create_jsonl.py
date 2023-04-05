@@ -3,6 +3,7 @@ import sys
 import argparse
 import os
 import streamlit as st
+import re
 # Create Reddit instance
 reddit = praw.Reddit(
     client_secret=os.environ['REDDIT_CLIENT_SECRET'],
@@ -21,7 +22,6 @@ def create(subreddits,comments,submission_body,
     COMP_END = '.#,'
     if questions_only:
         PROMPT_END = '?'
-
     ans = []
     line_count = 0
     # Loop through subreddits and submissions
@@ -54,7 +54,8 @@ def create(subreddits,comments,submission_body,
             selftext = selftext.replace("\\", '')
             # Generate JSON string using submission body
             if selftext and submission_body and submission and len(selftext) >= min_completion_length and len(selftext) <= max_completion_length \
-                and submission.score >= min_rating_for_sub:
+                and submission.score >= min_rating_for_sub \
+                and (regex is not None and re.search(regex,selftext) is not None):
                 prompt = f'"prompt": "{title}{PROMPT_END}",'
                 completion = f'"completion": " {selftext}{COMP_END}"'
                 string = '{' + prompt + completion + '}'
