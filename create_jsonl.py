@@ -17,11 +17,12 @@ def create(subreddits,comments,submission_body,
         questions_only,min_completion_length,
         max_completion_length,max_submissions,
         must_contain, min_rating_for_sub, min_rating_for_comment,
-        max_lines,comp_regex):
+        max_lines,cre_pattern):
     PROMPT_END = '\n\n###\n\n'
     COMP_END = '.#,'
     if questions_only:
         PROMPT_END = '?'
+    comp_regex = re.compile(cre_pattern) if cre_pattern is not None else None
     ans = []
     line_count = 0
     # Loop through subreddits and submissions
@@ -55,7 +56,7 @@ def create(subreddits,comments,submission_body,
             # Generate JSON string using submission body
             if selftext and submission_body and submission and len(selftext) >= min_completion_length and len(selftext) <= max_completion_length \
                 and submission.score >= min_rating_for_sub \
-                and (comp_regex is not None and re.search(comp_regex,selftext) is not None):
+                and (comp_regex is None or re.search(comp_regex,selftext) is not None):
                 prompt = f'"prompt": "{title}{PROMPT_END}",'
                 completion = f'"completion": " {selftext}{COMP_END}"'
                 string = '{' + prompt + completion + '}'
