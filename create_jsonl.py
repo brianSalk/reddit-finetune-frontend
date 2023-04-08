@@ -17,9 +17,7 @@ def create(subreddits,comments,submission_body,
         questions_only,min_completion_length,
         max_completion_length,max_submissions,
         must_contain, min_rating_for_sub, min_rating_for_comment,
-        max_lines,cre_pattern):
-    PROMPT_END = '\n\n###\n\n'
-    COMP_END = '.#,'
+        max_lines,cre_pattern, PROMPT_END=r'\n\n###\n\n',COMP_END="###"):
     if questions_only:
         PROMPT_END = '?'
     comp_regex = re.compile(cre_pattern) if cre_pattern is not None else None
