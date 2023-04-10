@@ -33,7 +33,7 @@ if st.checkbox('set maximum number of submissions per subreddit'):
     max_submissions_per_sub = st.number_input('maximum number of submissions per subreddit', min_value=1,max_value=1_000, step=1)
 if st.checkbox('use regular expression'):
     comp_regex = st.text_input('only inlude completions that include the following regex')
-if st.checkbox(r'set prompt end (default is \n\n###\n\n), if questions only is checked, this will be ignored and "?" will always be used as the prompt end'):
+if st.checkbox(r'set prompt end (default is \n\n###\n\n)',disabled = questions_only):
     prompt_end = st.text_input("prompt end")
 if st.checkbox(r'set completion end (default is ###)'):
     comp_end = st.text_input("completion end")
