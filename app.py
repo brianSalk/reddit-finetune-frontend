@@ -19,7 +19,7 @@ with st.sidebar:
 st.title(":green[Create Jsonl From Reddit]")
 subreddits = st.text_input('enter subreddits seperated by spaces')
 
-submission_body = st.checkbox('include the submission body in your jsonl')
+submission_body = st.checkbox('include the submission body in your jsonl', value = True)
 questions_only = st.checkbox('questions only (prompt ends with "?")')
 if st.checkbox('include comments'):
     comment_count = st.number_input('maximum number of comments to scrape per submission', step=1)
@@ -37,7 +37,7 @@ if st.checkbox(r'set prompt end (default is \n\n###\n\n)',disabled = questions_o
     prompt_end = st.text_input("prompt end")
 if st.checkbox(r'set completion end (default is ###)'):
     comp_end = st.text_input("completion end")
-if st.button('get jsonl'):
+if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body)):
     st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
     st.write('**please be patient while I create your JSONL file**')
     max_completion_length = 200
@@ -45,6 +45,8 @@ if st.button('get jsonl'):
     jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,max_submissions_per_sub, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines,comp_regex, prompt_end, comp_end)
     st.write('your jsonl is ready, copy the text below')
     st.code(jsonl_text)
+if comment_count == 0 and not submission_body:
+    st.write(':red[you must use submission body and/or comments]')
 
     
 
