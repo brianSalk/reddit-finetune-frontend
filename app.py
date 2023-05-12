@@ -9,8 +9,8 @@ max_lines = float('inf')
 comment_count = 0
 min_sub_upvote=0
 min_comment_upvote=0
-comp_regex= None
-prompt_regex = None
+comp_regex= ""
+prompt_regex = ""
 prompt_end=r'\n\n###\n\n'
 comp_end="###"
 
@@ -35,6 +35,10 @@ if st.checkbox('set maximum number of submissions per subreddit'):
 if st.checkbox('filter with regular expression'):
     prompt_regex = st.text_input('only include prompts that include the following regex')
     comp_regex = st.text_input('only inlude completions that include the following regex')
+    if prompt_regex == "":
+        prompt_regex = ".*"
+    if comp_regex == "":
+        comp_regex = ".*"
 if st.checkbox(r'set prompt end (default is \n\n###\n\n)',disabled = questions_only):
     prompt_end = st.text_input("prompt end")
 if st.checkbox(r'set completion end (default is ###)'):
@@ -44,7 +48,11 @@ if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body))
     st.write('**please be patient while I create your JSONL file**')
     max_completion_length = 200
     min_completion_length = 2
-    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, questions_only,min_completion_length,max_completion_length,max_submissions_per_sub, "feature not supported", min_sub_upvote,min_comment_upvote, max_lines,comp_regex,prompt_regex, prompt_end, comp_end)
+    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, 
+            questions_only,min_completion_length,max_completion_length,
+            max_submissions_per_sub, min_sub_upvote,min_comment_upvote, 
+            max_lines,comp_regex,prompt_regex, 
+            prompt_end, comp_end)
     st.write('your jsonl is ready, copy the text below')
     st.code(jsonl_text)
 if comment_count == 0 and not submission_body:
