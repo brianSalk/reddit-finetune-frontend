@@ -44,17 +44,20 @@ if st.checkbox(r'set prompt end (default is \n\n###\n\n)',disabled = questions_o
 if st.checkbox(r'set completion end (default is ###)'):
     comp_end = st.text_input("completion end")
 if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body)):
-    st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
-    st.write('**please be patient while I create your JSONL file**')
-    max_completion_length = 200
-    min_completion_length = 2
-    jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, 
-            questions_only,min_completion_length,max_completion_length,
-            max_submissions_per_sub, min_sub_upvote,min_comment_upvote, 
-            max_lines,comp_regex,prompt_regex, 
-            prompt_end, comp_end)
-    st.write('your jsonl is ready, copy the text below')
-    st.code(jsonl_text)
+    if len(subreddits) > 0:
+        st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
+        st.write('**please be patient while I create your JSONL file**')
+        max_completion_length = 200
+        min_completion_length = 2
+        jsonl_text = create_jsonl.create(subreddits, comment_count, submission_body, 
+                questions_only,min_completion_length,max_completion_length,
+                max_submissions_per_sub, min_sub_upvote,min_comment_upvote, 
+                max_lines,comp_regex,prompt_regex, 
+                prompt_end, comp_end)
+        st.write('your jsonl is ready, copy the text below')
+        st.code(jsonl_text)
+    else:
+        st.write(':red[you must specify at least one subreddit]')
 if comment_count == 0 and not submission_body:
     st.write(':red[you must use submission body and/or comments]')
 
