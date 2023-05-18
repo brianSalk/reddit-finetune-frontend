@@ -29,6 +29,11 @@ def create(subreddits,comments,submission_body,
             return "\n".join(ans)
         next_sub = reddit.subreddit(sub)
         sub_count = 0
+        try:
+            reddit.subreddits.search_by_name(next_sub, exact=True)
+        except Exception:
+            st.write(f':red[SUBREDDIT {next_sub} NOT FOUND]')
+            continue
         for submission in next_sub.top(limit=1_000):
             scraped_current = False
             if sub_count == max_submissions:
