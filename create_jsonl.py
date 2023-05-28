@@ -4,7 +4,7 @@ import argparse
 import os
 import streamlit as st
 import re
-# Create Reddit instance
+# Create Reddit instance using environment variables
 reddit = praw.Reddit(
     client_secret=os.environ['REDDIT_CLIENT_SECRET'],
     client_id=os.environ['REDDIT_CLIENT_ID'],
@@ -27,7 +27,6 @@ def create(subreddits,comments,submission_body,
     comp_regex = re.compile(cre_pattern) if cre_pattern is not None else None
     ans = []
     line_count = 0
-    # Loop through subreddits and submissions
     for sub in subreddits.split(' '):
         if line_count == max_lines:
             return "\n".join(ans)
@@ -45,19 +44,15 @@ def create(subreddits,comments,submission_body,
             if line_count == max_lines:
                 return "\n".join(ans)
             title = submission.title.strip()
-            # skip submission if title does not match regex for prompt
             if not re.search(pre_pattern, title):
                 continue
             selftext = submission.selftext.strip()
 
-            # Skip if submission if title does not end with question mark
             if questions_only and not title.endswith('?'):
                 continue
 
-            # Remove question mark from title
             if questions_only:
                 title = title[:-1]
-            # Replace special characters
             title = title.replace('"', "'")
             title = title.replace("\\", '')
             selftext = selftext.replace('\n', ' ')
