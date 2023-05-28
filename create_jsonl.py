@@ -18,6 +18,10 @@ def create(subreddits,comments,submission_body,
         max_submissions, min_rating_for_sub, min_rating_for_comment,
         max_lines,cre_pattern, pre_pattern ,
         PROMPT_END=r'\n\n###\n\n', COMP_END="###"):
+    """
+    takes in all the user specified options as arguments
+    returns a valid JSONL file based on the users specifications
+    """
     if questions_only:
         PROMPT_END = '?'
     comp_regex = re.compile(cre_pattern) if cre_pattern is not None else None
