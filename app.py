@@ -15,6 +15,9 @@ prompt_end=r'\n\n###\n\n'
 comp_end="###"
 
 with st.sidebar:
+    st.title('Use this app to create a JSONL file to use for fine-tuning with openai models')
+    st.write('this app uses submission titles as prompts and the submission text and/or comments as completions')
+    st.write('follow along with the instructions [here](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)')
     st.title("found a bug or want to improve this app?")
     st.write("submit a pull request or open an issue [here](https://github.com/brianSalk/reddit-finetune-frontend)")
 
