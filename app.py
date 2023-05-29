@@ -41,9 +41,9 @@ if st.checkbox('filter with regular expression'):
         prompt_regex = ".*"
     if comp_regex == "":
         comp_regex = ".*"
-if st.checkbox(r'set prompt end (default is \n\n###\n\n)',disabled = questions_only, help=r'Each prompt should end with a fixed separator to inform the model when the prompt ends and the completion begins. A simple separator which generally works well is \n\n###\n\n. The separator should not appear elsewhere in any prompt. [openAI](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)'):
+if st.checkbox(r'set prompt end (default is `\n\n###\n\n`)',disabled = questions_only, help=r'Each prompt should end with a fixed separator to inform the model when the prompt ends and the completion begins. A simple separator which generally works well is `\n\n###\n\n`. The separator should not appear elsewhere in any prompt. [openAI](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)'):
     prompt_end = st.text_input("prompt end")
-if st.checkbox(r'set completion end (default is ###)', help='Each completion should end with a fixed stop sequence to inform the model when the completion ends. A stop sequence could be \n, ###, or any other token that does not appear in any completion.\n[openAI](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)'):
+if st.checkbox(r'set completion end (default is `###`)', help='Each completion should end with a fixed stop sequence to inform the model when the completion ends. A stop sequence could be \n, `###`, or any other token that does not appear in any completion.\n[openAI](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)'):
     comp_end = st.text_input("completion end")
 if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body)):
     if len(subreddits) > 0:
