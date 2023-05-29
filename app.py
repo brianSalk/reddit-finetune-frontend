@@ -17,8 +17,10 @@ comp_end="###"
 with st.sidebar:
     st.title("found a bug or want to improve this app?")
     st.write("submit a pull request or open an issue [here](https://github.com/brianSalk/reddit-finetune-frontend)")
+
 st.title(":green[Create Jsonl From Reddit]")
 subreddits = st.text_input('enter subreddits seperated by spaces')
+
 
 submission_body = st.checkbox('include the submission body in your jsonl', value = True)
 questions_only = st.checkbox('questions only (prompt ends with "?")')
@@ -45,7 +47,7 @@ if st.checkbox(r'set completion end (default is ###)'):
     comp_end = st.text_input("completion end")
 if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body)):
     if len(subreddits) > 0:
-        st.write(f'creating jsonl from the following subreddits: :red[{subreddits}]')
+        st.write(f'creating jsonl from the following subreddits: :green[{subreddits}]')
         st.write('**please be patient while I create your JSONL file**')
         max_completion_length = 200
         min_completion_length = 2
