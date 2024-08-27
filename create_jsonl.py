@@ -12,7 +12,7 @@ reddit = praw.Reddit(
     password=st.secrets['REDDIT_PASSWORD'],
     user_agent='userboboozerforHooozzer'
 )
-st.write(reddit.me)
+st.write(reddit)
 
 def create(subreddits,comments,submission_body,
         questions_only,min_completion_length, max_completion_length,
