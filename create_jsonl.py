@@ -13,6 +13,7 @@ reddit = praw.Reddit(
     user_agent='userboboozerforHooozzer'
 )
 st.write(reddit)
+st.write('WROTE THAT')
 
 def create(subreddits,comments,submission_body,
         questions_only,min_completion_length, max_completion_length,
