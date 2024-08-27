@@ -12,8 +12,7 @@ reddit = praw.Reddit(
     password=st.secrets['REDDIT_PASSWORD'],
     user_agent='userboboozerforHooozzer'
 )
-st.write(reddit)
-st.write('WROTE THAT')
+
 
 def create(subreddits,comments,submission_body,
         questions_only,min_completion_length, max_completion_length,
@@ -24,6 +23,8 @@ def create(subreddits,comments,submission_body,
     takes in all the user specified options as arguments
     returns a valid JSONL file based on the users specifications
     """
+    st.write(reddit)
+    st.write('WROTE THAT')
     if questions_only:
         PROMPT_END = '?'
     comp_regex = re.compile(cre_pattern) if cre_pattern is not None else None
