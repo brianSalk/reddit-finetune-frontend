@@ -6,10 +6,10 @@ import streamlit as st
 import re
 # Create Reddit instance using environment variables
 reddit = praw.Reddit(
-    client_secret=os.environ['REDDIT_CLIENT_SECRET'],
-    client_id=os.environ['REDDIT_CLIENT_ID'],
-    usename=os.environ['REDDIT_USER_NAME'],
-    password=os.environ['REDDIT_PASSWORD'],
+    client_secret=st.secrets['REDDIT_CLIENT_SECRET'],
+    client_id=st.secrets['REDDIT_CLIENT_ID'],
+    usename=st.secrets['REDDIT_USER_NAME'],
+    password=st.secrets['REDDIT_PASSWORD'],
     user_agent='userboboozerforHooozzer'
 )
 
