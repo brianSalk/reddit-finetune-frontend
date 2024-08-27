@@ -23,7 +23,7 @@ def create(subreddits,comments,submission_body,
     takes in all the user specified options as arguments
     returns a valid JSONL file based on the users specifications
     """
-    st.write(reddit)
+    st.write(reddit.user.me())
     st.write('WROTE THAT')
     if questions_only:
         PROMPT_END = '?'
