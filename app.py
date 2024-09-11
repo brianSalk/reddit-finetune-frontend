@@ -50,7 +50,7 @@ if st.checkbox(r'use custom prompt end (default is **\n\n###\n\n**)',disabled = 
     prompt_end = st.text_input("prompt end")
 if st.checkbox(r'use custom completion end (default is **###**)', help='Each completion should end with a fixed stop sequence to inform the model when the completion ends. A stop sequence could be \n, `###`, or any other token that does not appear in any completion.\n[openAI](https://platform.openai.com/docs/guides/fine-tuning/preparing-your-dataset)'):
     comp_end = st.text_input("completion end")
-submitted = st.form_submit_button('get jsonl', disabled=(comment_count == 0 and not submission_body))
+submitted = st.button('get jsonl', disabled=(comment_count == 0 and not submission_body))
 
 
 # form end
