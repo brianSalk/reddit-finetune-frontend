@@ -61,8 +61,8 @@ if st.button('get jsonl', disabled=(comment_count == 0 and not submission_body))
                     prompt_end, comp_end)
             st.write('your jsonl is ready, copy the text below')
             st.code(jsonl_text)
-        else:
-            st.write(':red[you must specify at least one subreddit]')
+    else:
+        st.write(':red[you must specify at least one subreddit]')
 if comment_count == 0 and not submission_body:
     st.write(':red[you must use submission body and/or comments]')
 
