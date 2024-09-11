@@ -95,4 +95,4 @@ def create(subreddits,comments,submission_body,
                         comment_count += 1
             if scraped_current == True:
                 sub_count+=1
-    return "\n".join(ans)
+    return '{\n' + "\n".join(ans) + '\n}'
