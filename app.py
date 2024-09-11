@@ -16,6 +16,8 @@ comp_end="###"
 max_completion_length = 200
 min_completion_length = 2
 
+if 'json' not in st.session_state:
+    st.session_state['json'] = ""
 with st.sidebar:
     st.title('Use this app to create a JSONL file to use for fine-tuning with openai models')
     st.write('this app uses submission titles as prompts and the submission text and/or comments as completions')
@@ -63,12 +65,11 @@ if submitted:
                     max_submissions_per_sub, min_sub_upvote,min_comment_upvote, 
                     max_lines,comp_regex,prompt_regex, 
                     prompt_end, comp_end)
+            st.session_state['json'] = jsonl_text
             st.write('your jsonl is ready, copy the text below')
-            st.code(jsonl_text)
+            st.code(st.session_state['json'])
     else:
         st.write(':red[you must specify at least one subreddit]')
-if comment_count == 0 and not submission_body:
-    st.write(':red[you must use submission body and/or comments]')
 
     
 
