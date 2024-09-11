@@ -67,9 +67,9 @@ if submitted:
                     prompt_end, comp_end)
             st.session_state['json'] = jsonl_text
             st.write('your jsonl is ready, copy the text below')
-st.code(st.session_state['json'])
     else:
         st.write(':red[you must specify at least one subreddit]')
 
+st.code(st.session_state['json'])
     
 
