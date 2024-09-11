@@ -18,6 +18,7 @@ min_completion_length = 2
 
 if 'json' not in st.session_state:
     st.session_state['json'] = ""
+    st.write('RESET')
 with st.sidebar:
     st.title('Use this app to create a JSONL file to use for fine-tuning with openai models')
     st.write('this app uses submission titles as prompts and the submission text and/or comments as completions')
